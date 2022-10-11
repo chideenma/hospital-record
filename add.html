@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form saved in local storage</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./index.js"></script>
+</head>
+<body>
+    <div id ="app">
+         <div class="logo">
+            
+            <img src="https://images.unsplash.com/photo-1631815590058-860e4f83c1e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=421&q=80" alt="">
+        </div>
+       <div>
+        <h1>MMA HOSPITAL</h1>
+        <div class="form-container">
+           
+            <form>
+                <div id="form-row">
+                    <div>
+                        <label for="first name">Enter First Name:</label><br>
+                        <input type="text" id="firstName" placeholder="First Name" required />
+                    </div>
+                   
+                    <div>
+                        <label for="last name">Enter Last Name:</label>
+                        <input type="text" id="lastName" placeholder="Last Name" required />
+                    </div>
+               
+            </div>
+            <div id="form-row">
+                <label>Enter Age: <input type="number" id="age" placeholder="Age" required /></label>
+                <label>Enter Address: <input type="text" id="address" placeholder="Address" required /></label>
+            </div>
+            <div id="form-row">
+                <label>Enter Temperature: <input type="number" id="temp" placeholder="Temperature" required /></label>
+                <label>Enter Symptoms: <input type="text" id="symptoms" placeholder="Symptoms" required /></label>
+            </div>
+            <div id="btn">
+                <button type="submit" id="submit-btn">SAVE</button>
+            </div>
+  
+            </form> 
+            
+           </div>
+       </div>
+      
+    </div>     
+</body>
+</html>
