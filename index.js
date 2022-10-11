@@ -74,8 +74,8 @@ document.addEventListener("submit", function (e) {
         row.innerHTML = `
         <td>${patient.firstName}</td>
         <td>${patient.lastName}</td>
-        <td>${patient.age}</td>
         <td>${patient.address}</td>
+        <td>${patient.age}</td>
         <td>${patient.temp}</td>
         <td>${patient.symptoms}</td>
         <td>X</td>
