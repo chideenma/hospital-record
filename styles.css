@@ -61,6 +61,11 @@ input {
     height: 50px;
     padding: 10px;
 }
+.required:after {
+    content:" *";
+    color: red;
+    display: inline;
+  }
 #btn {
     display: flex;
     justify-content: center;
