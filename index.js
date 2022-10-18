@@ -1,3 +1,14 @@
+
+let clearForm = () => {
+  document.getElementById("firstName").value = "";
+  document.getElementById("lastName").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("temp").value = "";
+  document.getElementById("symptoms").value = "";
+}
+
+
 class Patient {
   savePatientDetails(firstName, lastName, age, temp, address, syptoms) {
     const currentPatientJSON = localStorage.getItem("patient");
@@ -11,6 +22,8 @@ class Patient {
       address: address,
       symptoms: syptoms,
     };
+
+    console.log(newPatient, 'New patoemt creatred')
     const newPatientArray = [...patientArray, newPatient];
 
     localStorage.setItem("patient", JSON.stringify(newPatientArray));
@@ -27,7 +40,19 @@ class Patient {
 
     return allpatients;
   }
+  getOnePatient(firstName) {
+    let allPatients = this.getAllPatients();
+
+    for (let i = 0; i < allPatients.length; i++) {
+      if (allPatients[i].firstName === firstName) {
+        console.log(allPatients[i], firstName);
+
+        return allPatients[i];
+      }
+    }
+  }
 }
+
 
 // Init Class Patient
 const patient = new Patient();
@@ -44,12 +69,7 @@ document.addEventListener("submit", function (e) {
   let symptoms = document.getElementById("symptoms").value;
   patient.savePatientDetails(firstName, lastName, age, temp, address, symptoms);
 
-  document.getElementById("firstName").value = "";
-  document.getElementById("lastName").value = "";
-  document.getElementById("age").value = "";
-  document.getElementById("address").value = "";
-  document.getElementById("temp").value = "";
-  document.getElementById("symptoms").value = "";
+  clearForm()
 });
 
 //Display the lists
@@ -68,8 +88,69 @@ window.addEventListener("DOMContentLoaded", (event) => {
           <td>${patient.age}</td>
           <td>${patient.temp}</td>
           <td>${patient.symptoms}</td>
-          <td>X</td>
+          <td class="button"><a href="/edit.html">Update!</a></td>
           `;
     patientList.appendChild(row);
   });
+
+
 });
+
+//When the Edit button is clicked
+
+// const clickEditButton = (firstName) => {
+
+//   let patient = new Patient;
+//   let selectedPatient = patient.getOnePatient(firstName);
+
+//   console.log(selectedPatient, 'Selected item');
+
+//   document.getElementById("edit-firstName").value = selectedPatient.firstName;
+//   document.getElementById("edit-lastName").value = selectedPatient.lastName;
+//   document.getElementById("edit-age").value = selectedPatient.age;
+//   document.getElementById("edit-address").value = selectedPatient.address;
+//   document.getElementById("edit-temp").value = selectedPatient.temp;
+//   document.getElementById("edit-symptoms").value = selectedPatient.symptoms;
+
+
+//   // Get the modal
+//   let modal = document.getElementById("myModal");
+
+//   modal.style.display = "block";
+
+//   //Handle the submit
+
+//   let submitEditForm = document.getElementById("modalBtn");
+
+//   submitEditForm.onclick = function (){
+//     console.log('button clicked')
+//     let updatedFirstName = document.getElementById("edit-firstName").value;
+//     let updatedlastName = document.getElementById("edit-lastName").value;
+//     let updatedage = document.getElementById("edit-age").value;
+//     let updatedaddress = document.getElementById("edit-address").value;
+//     let updatedtemp = document.getElementById("edit-temp").value;
+//     let updatedSymptoms = document.getElementById("edit-symptoms").value;
+  
+  
+//     let Updatedpatient = new Patient(
+//       updatedFirstName,
+//       updatedlastName,
+//       updatedaddress,
+//       updatedage,
+//       updatedtemp,
+//       updatedSymptoms,
+//     );
+
+//     console.log(Updatedpatient, 'updated newly');
+
+
+//     let allPatientList = JSON.parse(localStorage.getItem("patient"));
+
+//     const updatedPatientArray = [...allPatientList, Updatedpatient];
+
+//     localStorage.setItem("patient", JSON.stringify(updatedPatientArray));
+
+//     modal.style.display = "none";
+//   }
+
+// }
