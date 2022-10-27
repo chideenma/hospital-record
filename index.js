@@ -1,4 +1,8 @@
 
+  console.log(uuid); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+
+
+
 let clearForm = () => {
   document.getElementById("firstName").value = "";
   document.getElementById("lastName").value = "";
@@ -70,6 +74,7 @@ document.addEventListener("submit", function (e) {
   patient.savePatientDetails(firstName, lastName, age, temp, address, symptoms);
 
   clearForm()
+  window.location.href = "/index.html";
 });
 
 //Display the lists
