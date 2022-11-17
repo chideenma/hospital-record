@@ -1,5 +1,5 @@
-
-  console.log(uuid); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+let id = crypto.randomUUID();
+  console.log(id); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 
 
@@ -14,11 +14,12 @@ let clearForm = () => {
 
 
 class Patient {
-  savePatientDetails(firstName, lastName, age, temp, address, syptoms) {
+  savePatientDetails(Id, firstName, lastName, age, temp, address, syptoms) {
     const currentPatientJSON = localStorage.getItem("patient");
     let patientArray = JSON.parse(currentPatientJSON) || [];
 
     const newPatient = {
+      id: Id,
       firstName: firstName,
       lastName: lastName,
       age: age,
@@ -27,7 +28,7 @@ class Patient {
       symptoms: syptoms,
     };
 
-    console.log(newPatient, 'New patoemt creatred')
+    console.log(newPatient, 'New patient created')
     const newPatientArray = [...patientArray, newPatient];
 
     localStorage.setItem("patient", JSON.stringify(newPatientArray));
@@ -44,12 +45,12 @@ class Patient {
 
     return allpatients;
   }
-  getOnePatient(firstName) {
+  getOnePatient(id) {
     let allPatients = this.getAllPatients();
 
     for (let i = 0; i < allPatients.length; i++) {
-      if (allPatients[i].firstName === firstName) {
-        console.log(allPatients[i], firstName);
+      if (allPatients[i].id === id) {
+        console.log(allPatients[i], id);
 
         return allPatients[i];
       }
@@ -64,14 +65,14 @@ const patient = new Patient();
 // Saving the patient details
 document.addEventListener("submit", function (e) {
   e.preventDefault();
-
+  let Id = id
   let firstName = document.getElementById("firstName").value;
   let lastName = document.getElementById("lastName").value;
   let age = document.getElementById("age").value;
   let address = document.getElementById("address").value;
   let temp = document.getElementById("temp").value;
   let symptoms = document.getElementById("symptoms").value;
-  patient.savePatientDetails(firstName, lastName, age, temp, address, symptoms);
+  patient.savePatientDetails(Id, firstName, lastName, age, temp, address, symptoms);
 
   clearForm()
   window.location.href = "/index.html";
@@ -93,8 +94,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
           <td>${patient.age}</td>
           <td>${patient.temp}</td>
           <td>${patient.symptoms}</td>
-          <td class="button"><a href="/edit.html">Update!</a></td>
-          `;
+          <td>${patient.id}</td>
+          <td class="button" onClick="clickEditButton(${patient.id})"><a href="/edit.html">Update!</a></td>`;
     patientList.appendChild(row);
   });
 
@@ -103,25 +104,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 //When the Edit button is clicked
 
-// const clickEditButton = (firstName) => {
+const clickEditButton = (id) => {
 
-//   let patient = new Patient;
-//   let selectedPatient = patient.getOnePatient(firstName);
+  let patient = new Patient;
+  let selectedPatient = patient.getOnePatient(id);
 
-//   console.log(selectedPatient, 'Selected item');
+  console.log(selectedPatient, 'Selected item');
 
-//   document.getElementById("edit-firstName").value = selectedPatient.firstName;
-//   document.getElementById("edit-lastName").value = selectedPatient.lastName;
-//   document.getElementById("edit-age").value = selectedPatient.age;
-//   document.getElementById("edit-address").value = selectedPatient.address;
-//   document.getElementById("edit-temp").value = selectedPatient.temp;
-//   document.getElementById("edit-symptoms").value = selectedPatient.symptoms;
+}
 
+  // document.getElementById("edit-firstName").value = selectedPatient.firstName;
+  // document.getElementById("edit-lastName").value = selectedPatient.lastName;
+  // document.getElementById("edit-age").value = selectedPatient.age;
+  // document.getElementById("edit-address").value = selectedPatient.address;
+  // document.getElementById("edit-temp").value = selectedPatient.temp;
+  // document.getElementById("edit-symptoms").value = selectedPatient.symptoms;
 
-//   // Get the modal
-//   let modal = document.getElementById("myModal");
-
-//   modal.style.display = "block";
 
 //   //Handle the submit
 
